@@ -1,0 +1,18 @@
+.list-autocomplete {
+    
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    position: absolute;
+    width: 100%;
+    z-index: 99;
+    margin-top: 45px;
+    max-height: 300px;
+    overflow: scroll;
+
+    li{
+        border: 0px solid;
+    }
+}
+
+.hidden{
+    display: none;
+}

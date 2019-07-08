@@ -1,7 +1,7 @@
-import React from 'react';
-import logo from '../images/logo.svg';
+import React from 'react'
+import logo from '../images/logo.svg'
 
-function Navbar() {
+function Card() {
     return (
         <>
             <div className="row card mb-3">
@@ -19,7 +19,7 @@ function Navbar() {
                 </div>
             </div> 
         </>
-	);
+	)
 }
 
-export default Navbar;
+export default Card
