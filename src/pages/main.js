@@ -19,33 +19,31 @@ function App() {
     }
 
     const searchButton = (value) => {
-        console.log('Boton - value: ',searchValue)
+        setSearchValue(value)
+        console.log('Boton - value: ',value)
     }
 
     useEffect(() => {
-
         axios.get(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=964`).then(({data}) => {
-            setPokemonList(data)
+            setPokemonList(data.results)
         })
         .catch(error => {
             console.log(error)
         })
-
     },[])
 
     return (
         <>
             <Navbar />
             <SearchComponent 
-                value={searchValue}
-                listAutocomplete={pokemonList.results} 
+                listAutocomplete={pokemonList} 
                 searchButton = {searchButton}
                 keyPress={keyPress}
             />
             <div className="container mt-5">
                 <div className="row justify-content-md-center mt-5">
                     <div className="col-md-6">
-                        hay { pokemonList.count } pokemon 
+                        Hay { pokemonList.count } pokemon
                         <Card />
                     </div>
                 </div>               

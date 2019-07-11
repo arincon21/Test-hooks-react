@@ -4,26 +4,25 @@ import '../styles/componet-search.scss'
 function SearchComponent(props) {
     
     const [valueSearch, setValueSearch] = useState("")
-    const [listAutocomplete, setListAutocomplete] = useState('Cargando....')
+    const [listAutocomplete, setListAutocomplete] = useState([])
 
     useEffect(() => {
-        if(props.listAutocomplete){
-            if(valueSearch !== ""){
-                const listQuery = props.listAutocomplete.filter(item => item.name.toLowerCase().includes(valueSearch.toLowerCase()))
-                let list = <li className="list-group-item list-group-item-action"> Ese pokemon no existe</li>
-                if(listQuery.length > 0){
-                    list = listQuery.map((item, index) => <li className="list-group-item list-group-item-action" key={index}> {item.name} </li>)
-                }
-                setListAutocomplete(list)
-            }else{
-                const list = props.listAutocomplete.map((item, index) => <li className="list-group-item list-group-item-action" key={index}> {item.name} </li>)
-                setListAutocomplete(list)
-            }
+        if(valueSearch !== ""){
+            const listQuery = props.listAutocomplete.filter(item => item.name.toLowerCase().includes(valueSearch.toLowerCase()))
+            setListAutocomplete(listQuery)
         }
     },[props.listAutocomplete, valueSearch])
 
     const changeValueSearch = event => {
         setValueSearch(event.target.value)
+    }
+
+    const onButtonClick = () => {
+        props.searchButton(valueSearch)
+    }
+
+    const selectOption = obj => {
+        setValueSearch(obj.name)
     }
 
     return (
@@ -44,18 +43,28 @@ function SearchComponent(props) {
                                 <button
                                     className="btn btn-dark"
                                     type="button"
-                                    onClick={props.searchButton}
+                                    onClick={onButtonClick}
                                 >
                                     Button
                                 </button>
                             </div>
 
-                            <ul className={valueSearch !== "" ? 'list-group list-autocomplete' : 'list-group list-autocomplete hidden'} >
-                                {listAutocomplete}
+                            <ul 
+                                className={valueSearch !== "" ? 'list-group list-autocomplete' : 'list-group list-autocomplete hidden'} 
+                            >
+                                {
+                                    listAutocomplete.map((item, index) => {
+                                        return <li 
+                                            className="list-group-item list-group-item-action" 
+                                            key={index}
+                                            onClick={() => selectOption(item)} 
+                                        > 
+                                            {item.name}
+                                        </li>
+                                    }) 
+                                }
                             </ul>
-
                         </div>
-                        
                     </div>
                 </div>
             </div>
