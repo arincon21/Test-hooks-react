@@ -1,7 +1,7 @@
 import React from 'react'
-import logo from '../images/logo.svg'
+import logo from '../../images/logo.svg'
 
-function Card() {
+function Card(props) {
     return (
         <>
             <div className="row card mb-3">
