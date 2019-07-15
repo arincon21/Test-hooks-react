@@ -22,8 +22,6 @@ const HeaderSearchComponent = (props) => {
         .catch(error => {
             console.log(error)
         })
-
-        console.log('Boton - value: ', value)
     }
 
     useEffect(() => {

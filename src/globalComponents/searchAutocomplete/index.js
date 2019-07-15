@@ -11,7 +11,6 @@ const SearchAutocomplete = (props) => {
         if (valueSearch !== "") {
             const listQuery = props.listAutocomplete.filter(item => item.name.toLowerCase().includes(valueSearch.toLowerCase()))
             setListAutocomplete(listQuery)
-            console.log(listQuery);
             if(listQuery.length > 0){
                 if(listQuery.length === 1 && listQuery[0].name === valueSearch.toLowerCase()){
                     setListState(false)
