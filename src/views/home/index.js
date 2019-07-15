@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 
-import Navbar from '../../globalComponents/component-navbar'
+import Navbar from '../../globalComponents/navbar'
 import HeaderSearchComponent from './componets/headerSearchComponent'
 import ContainerCard from './componets/containerCards'
 

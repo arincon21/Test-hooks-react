@@ -1,7 +1,7 @@
 import React from 'react'
 import Item from './list-autocomplete-item'
 
-export default props => {
+const ListAutocomplete = (props) => {
     return (
         <>
             <ul className={props.className} >
@@ -17,4 +17,6 @@ export default props => {
             </ul>
         </>
     )
-} 
+}
+
+export default ListAutocomplete

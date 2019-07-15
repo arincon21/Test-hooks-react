@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import SearchAutocomplete from '../../../globalComponents/searchAutocomplete'
 
-function App(props) {
+const HeaderSearchComponent = (props) => {
 
     const [pokemonList, setPokemonList] = useState([])
 
@@ -53,4 +53,4 @@ function App(props) {
     )
 }
 
-export default App
+export default HeaderSearchComponent

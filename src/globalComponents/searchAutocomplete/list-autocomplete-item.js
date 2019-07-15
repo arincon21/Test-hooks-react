@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default props => {
+const LisAutocompleteItem = (props) => {
 
     const changeValueSearch = () => {
         props.onClick(props.value)
@@ -13,4 +13,7 @@ export default props => {
             </li>
         </>
     )
-} 
+}
+
+
+export default LisAutocompleteItem

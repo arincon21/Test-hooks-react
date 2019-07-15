@@ -2,15 +2,27 @@ import React,{ useState, useEffect }  from 'react'
 import ListAutocomplete from './list-autocomplete'
 import './style.scss'
 
-export default props => {
- 
+const SearchAutocomplete = (props) => {
     const [valueSearch, setValueSearch] = useState("")
     const [listAutocomplete, setListAutocomplete] = useState([])
+    const [listState, setListState] = useState(false)
 
     useEffect(() => {
         if (valueSearch !== "") {
             const listQuery = props.listAutocomplete.filter(item => item.name.toLowerCase().includes(valueSearch.toLowerCase()))
             setListAutocomplete(listQuery)
+            console.log(listQuery);
+            if(listQuery.length > 0){
+                if(listQuery.length === 1 && listQuery[0].name === valueSearch.toLowerCase()){
+                    setListState(false)
+                }else{
+                    setListState(true)
+                }
+            }else{
+                setListState(false)
+            }
+        }else{
+            setListState(false)
         }
     }, [props.listAutocomplete, valueSearch])
 
@@ -20,6 +32,7 @@ export default props => {
 
     const onButtonClick = () => {
         props.searchButton(valueSearch)
+        setListState(false)
     }
 
     const selectOption = obj => {
@@ -47,11 +60,13 @@ export default props => {
                     </button>
                 </div>
                 <ListAutocomplete
-                    className={valueSearch !== "" ? 'list-group list-autocomplete' : 'list-group list-autocomplete hidden'}
+                    className={listState ? 'list-group list-autocomplete' : 'list-group list-autocomplete hidden'}
                     listOptions={listAutocomplete}
                     onClick={selectOption}
                 />
             </div>
         </React.Fragment>
     )
-} 
+}
+
+export default SearchAutocomplete
