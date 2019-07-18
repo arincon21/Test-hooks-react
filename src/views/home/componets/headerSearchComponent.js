@@ -1,37 +1,42 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 
 import SearchAutocomplete from '../../../globalComponents/searchAutocomplete'
+import searchForName from '../services/search-for-name'
+import searchAll from '../services/seach-all'
 
 const HeaderSearchComponent = (props) => {
 
     const [pokemonList, setPokemonList] = useState([])
 
-    const keyPress = event => {
+    const keyPress = async event => {
         if (event.key === 'Enter') {
-            console.log('keyPress - value: ', event.target.value)
+            const request = await searchForName(event.target.value)
+            if(request.success){
+                props.stateSearchValue(request.response)
+            }else{
+                console.error(request.response);
+            }
         }
     }
 
-    const searchButton = (value) => {
-        axios.get(`https://pokeapi.co/api/v2/pokemon/${value}`)
-        .then(({ data }) => {
-            props.stateSearchValue(data)
-            
-        })
-        .catch(error => {
-            console.log(error)
-        })
+    const searchButton = async name => {
+        const request = await searchForName(name)
+        if(request.success){
+            props.stateSearchValue(request.response)
+        }else{
+            console.error(request.response);
+        }
     }
 
     useEffect(() => {
-        axios.get(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=964`)
-        .then(({ data }) => {
-            setPokemonList(data.results)
-        })
-        .catch(error => {
-            console.log(error)
-        })
+        (async ()=> {
+            const request = await searchAll()
+            if(request.success){
+                setPokemonList(request.response.results)
+            }else{
+                console.error(request.response);
+            }
+        })()
     }, [])
 
     return (
